@@ -1,3 +1,5 @@
+var config = require("./config.js");
+
 module.exports = {
   siteMetadata: {
     title: `Rocky's Awesome T-shirt store`,
@@ -6,6 +8,14 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-stripe`,
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: [`Product`, `Sku`],
+        secretKey: config.stripe.testSecret,
+        downloadFiles: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -32,4 +42,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
